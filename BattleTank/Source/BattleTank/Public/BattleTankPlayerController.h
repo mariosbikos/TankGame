@@ -41,5 +41,5 @@ private:
 	float CrossHairYLocation = 0.33333;
 
 	UPROPERTY(EditAnywhere)
-	float LineTraceRange = 1000000;
+	float LineTraceRange = 10000000;
 };

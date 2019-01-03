@@ -3,6 +3,7 @@
 
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
+#include "TankTurret.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
@@ -15,6 +16,11 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
+void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
+{
+	Barrel = BarrelToSet;
+	Turret = TurretToSet;
+}
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
@@ -43,27 +49,16 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		//UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s from %s with Launch Speed: %f"), *GetOwner()->GetName(), *HitLocation.ToString(), *Barrel->GetComponentLocation().ToString(), LaunchSpeed);
 		UE_LOG(LogTemp, Warning, TEXT("Tank: %s -> Aim solution found"), *GetOwner()->GetName());
 		//Move the barrel
-		MoveBarrelTowards(AimDirection);
+		MoveBarrelTowards(AimDirection); 
+		MoveTurretTowards(AimDirection);
 	}
 	else
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Tank: %s -> No Aim Solve Found"),*GetOwner()->GetName());
 	}
-
-
-	
-}
-
-void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
-{
-	Barrel = BarrelToSet;
 }
 
 
-void UTankAimingComponent::SetTurretReference(UStaticMeshComponent* TurretToSet)
-{
-	Turret = TurretToSet;
-}
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
@@ -72,6 +67,18 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	FRotator AimAsRotator = AimDirection.Rotation();
 	FRotator DeltaRotator = AimAsRotator - BarrelRotator;
 
-	Barrel->Elevate(5);
+	Barrel->Elevate(DeltaRotator.Pitch); //Pitch will be clamped from (-1,1) in Elevate method. 
+
+	
+}
+
+void UTankAimingComponent::MoveTurretTowards(FVector AimDirection)
+{
+	//Work out difference between current turret rotation and aim direction
+	FRotator TurretRotator = Turret->GetForwardVector().Rotation();
+	FRotator AimAsRotator = AimDirection.Rotation();
+	FRotator DeltaRotator = AimAsRotator - TurretRotator;
+
+	Turret->Spin(DeltaRotator.Yaw); //Pitch will be clamped from (-1,1) in Elevate method.
 }
 
