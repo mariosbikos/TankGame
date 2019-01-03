@@ -33,8 +33,6 @@ void ABattleTankPlayerController::Tick(float DeltaTime)
 	
 	AimTowardsCrosshair();
 
-		//Find where 2D ui is raycasting on 3D world
-		//move the barrel gradually towards that hit world location(up/down only). Do the same for turret(left/right only)
 }
 
 void ABattleTankPlayerController::AimTowardsCrosshair()
@@ -66,10 +64,7 @@ bool ABattleTankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation
 	if(GetLookDirection(ScreenLocation, OutLookDirection))
 	{
 		//Line-trace along that look direction and see what we hit up to a max-range
-		if (GetLookVectorHitLocation(OutLookDirection, OutHitLocation))
-		{
-			return true;
-		}
+		return GetLookVectorHitLocation(OutLookDirection, OutHitLocation);
 
 	}
 	return false;
@@ -102,6 +97,7 @@ bool ABattleTankPlayerController::GetLookVectorHitLocation(FVector LookDirection
 		OutLookVectorHitLocation = HitResult.Location;
 		return true;
 	}
+
 	OutLookVectorHitLocation = FVector(0);
 	return false;
 }

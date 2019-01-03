@@ -17,14 +17,14 @@ public:
 	UTankAimingComponent();
 
 protected:
-	class UStaticMeshComponent* Barrel = nullptr;
+	class UTankBarrel* Barrel = nullptr;
 	class UStaticMeshComponent* Turret = nullptr;
 public:	
 	//TODO: Add SetTurretReference 
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
 	
-	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
+	void SetBarrelReference(UTankBarrel* BarrelToSet);
 	void SetTurretReference(UStaticMeshComponent* TurretToSet);
 
 	void MoveBarrelTowards(FVector AimDirection);

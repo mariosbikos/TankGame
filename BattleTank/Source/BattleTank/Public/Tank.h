@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
+class UTankBarrel;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -19,21 +20,19 @@ private:
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	//This is the standard launch speed of the tank
 	UPROPERTY(EditAnywhere,Category=Firing)
 	float LaunchSpeed = 100000; //TODO: Find sensible default
 
 public:
 	void AimAt(FVector HitLocation);
 
-	UFUNCTION(BlueprintCallable)
-	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable,Category = Setup)
+	void SetBarrelReference(UTankBarrel* BarrelToSet);
+	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UStaticMeshComponent* TurretToSet);
 };
