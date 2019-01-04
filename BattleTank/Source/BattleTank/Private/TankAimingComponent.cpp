@@ -79,6 +79,14 @@ void UTankAimingComponent::MoveTurretTowards(FVector AimDirection)
 	FRotator AimAsRotator = AimDirection.Rotation();
 	FRotator DeltaRotator = AimAsRotator - TurretRotator;
 
-	Turret->Rotate(DeltaRotator.Yaw); //Pitch will be clamped from (-1,1) in Elevate method.
+	if (DeltaRotator.Yaw<180.0f && DeltaRotator.Yaw>-180.0f)
+	{
+		Turret->Rotate(DeltaRotator.Yaw); //Pitch will be clamped from (-1,1) in Elevate method.
+	}
+	else
+	{
+		Turret->Rotate(-DeltaRotator.Yaw); //Pitch will be clamped from (-1,1) in Elevate method.
+	}
+	
 }
 

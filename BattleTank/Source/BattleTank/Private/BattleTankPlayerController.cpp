@@ -22,7 +22,7 @@ void ABattleTankPlayerController::BeginPlay()
 	{
 		UE_LOG(LogTemp, Error, TEXT("Error: PlayerController not possessing a Tank!"));
 	}
-	
+
 
 
 }
