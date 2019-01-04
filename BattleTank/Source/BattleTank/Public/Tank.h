@@ -26,7 +26,7 @@ private:
 
 	//This is the standard launch speed of the tank
 	UPROPERTY(EditAnywhere,Category=Firing)
-	float LaunchSpeed = 100000; //TODO: Find sensible default
+	float LaunchSpeed = 4000; //TODO: Find sensible default
 
 public:
 	void AimAt(FVector HitLocation);

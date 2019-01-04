@@ -19,7 +19,7 @@ public:
 	void Elevate(float RelativeSpeed);
 
 	UPROPERTY(EditAnywhere,Category = Setup)
-	float MaxDegreesPerSeconds = 5; //speed of barrel moving around
+	float MaxDegreesPerSeconds = 10; //speed of barrel moving around
 	UPROPERTY(EditAnywhere, Category = Setup)
 	float MaxElevationDegrees = 40;
 	UPROPERTY(EditAnywhere, Category = Setup)

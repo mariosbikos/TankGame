@@ -3,7 +3,7 @@
 #include "TankTurret.h"
 
 
-void UTankTurret::Spin(float RelativeSpeed)
+void UTankTurret::Rotate(float RelativeSpeed)
 {
 	//move turret the right amount this frame
 
