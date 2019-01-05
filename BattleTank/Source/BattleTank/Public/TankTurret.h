@@ -14,7 +14,7 @@ class BATTLETANK_API UTankTurret : public UStaticMeshComponent
 {
 	GENERATED_BODY()
 private:
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	float MaxDegreesPerSeconds = 25; //speed of turret moving around
 public:
 

@@ -15,14 +15,7 @@ class BATTLETANK_API ABattleTankAIController : public AAIController
 	GENERATED_BODY()
 private:
 
-
-
 	virtual void BeginPlay() override;
-
 	virtual void Tick(float DeltaTime) override;
-
-
-
-
 	
 };

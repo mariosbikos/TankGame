@@ -13,10 +13,7 @@ void ABattleTankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
-	if (!PlayerController) { return; }
-	
-	ATank* PlayerTank = Cast<ATank>(PlayerController->GetPawn());
+	ATank* PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	ATank* ControlledTank = Cast<ATank>(GetPawn());
 	
 	if (!PlayerTank || !ControlledTank)

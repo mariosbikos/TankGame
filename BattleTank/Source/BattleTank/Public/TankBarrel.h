@@ -18,10 +18,10 @@ public:
 	//-1 is max downward speed and +1 is max up movement(from -1 to +1)
 	void Elevate(float RelativeSpeed);
 
-	UPROPERTY(EditAnywhere,Category = Setup)
+	UPROPERTY(EditDefaultsOnly,Category = Setup)
 	float MaxDegreesPerSeconds = 10; //speed of barrel moving around
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	float MaxElevationDegrees = 40;
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	float MinElevationDegrees = 0;
 };

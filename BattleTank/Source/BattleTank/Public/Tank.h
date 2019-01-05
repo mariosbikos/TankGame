@@ -27,15 +27,16 @@ private:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	//This is the standard launch speed of the tank
-	UPROPERTY(EditAnywhere,Category=Firing)
+	UPROPERTY(EditDefaultsOnly,Category=Firing)
 	float LaunchSpeed = 4000; //TODO: Find sensible default
 
-	UPROPERTY(EditAnywhere, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	TSubclassOf<AProjectile> ProjectileClass;
 
-	class UTankBarrel* Barrel = nullptr;
-
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float ReloadTimeInSeconds = 3;
+
+	class UTankBarrel* Barrel = nullptr;
 	double LastFireTime = 0;
 
 public:
