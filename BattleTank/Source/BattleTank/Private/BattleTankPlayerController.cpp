@@ -12,19 +12,6 @@ ATank* ABattleTankPlayerController::GetControlledTank() const
 void ABattleTankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-
-	ATank* TankPawn = GetControlledTank();
-	if (TankPawn)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("PlayerController possesses %s"), *TankPawn->GetName());
-	}
-	else
-	{
-		UE_LOG(LogTemp, Error, TEXT("Error: PlayerController not possessing a Tank!"));
-	}
-
-
-
 }
 
 void ABattleTankPlayerController::Tick(float DeltaTime)

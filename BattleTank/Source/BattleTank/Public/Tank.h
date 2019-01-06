@@ -15,7 +15,6 @@ class BATTLETANK_API ATank : public APawn
 	GENERATED_BODY()
 protected:
 	class UTankAimingComponent* TankAimingComponent = nullptr;
-
 private:
 	// Sets default values for this pawn's properties
 	ATank();

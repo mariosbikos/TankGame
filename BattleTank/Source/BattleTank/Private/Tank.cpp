@@ -3,6 +3,7 @@
 #include "Tank.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
+#include "TankMovementComponent.h"
 #include "TankAimingComponent.h"
 
 // Sets default values
@@ -12,8 +13,6 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(TEXT("TankAimingComponent"));
-	
-
 }
 
 // Called when the game starts or when spawned
