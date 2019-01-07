@@ -32,6 +32,7 @@ public:
 	
 	//TODO: Add SetTurretReference 
 	void AimAt(FVector HitLocation, float LaunchSpeed);
+	UFUNCTION(BlueprintCallable,Category = "Setup")
 	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
 	void MoveBarrelTowards(FVector AimDirection);
@@ -42,5 +43,5 @@ protected:
 	UTankTurret* Turret = nullptr;
 
 	UPROPERTY(BlueprintReadOnly, Category = "State")
-	EFiringStatus FiringState = EFiringStatus::Reloading;
+	EFiringStatus FiringState = EFiringStatus::Aiming;
 };
