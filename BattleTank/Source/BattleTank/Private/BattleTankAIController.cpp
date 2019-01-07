@@ -21,6 +21,9 @@ void ABattleTankAIController::Tick(float DeltaTime)
 		return;
 	}
 	
+	//Move towards player
+	MoveToActor(PlayerTank, AcceptanceRadius);
+
 	ControlledTank->AimAt(PlayerTank->GetActorLocation());
 
 	//Fire if ready
