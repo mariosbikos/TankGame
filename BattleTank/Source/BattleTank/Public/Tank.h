@@ -14,6 +14,7 @@ class BATTLETANK_API ATank : public APawn
 {
 	GENERATED_BODY()
 protected:
+	UPROPERTY(BlueprintReadOnly,Category = "Setup")
 	class UTankAimingComponent* TankAimingComponent = nullptr;
 private:
 	// Sets default values for this pawn's properties

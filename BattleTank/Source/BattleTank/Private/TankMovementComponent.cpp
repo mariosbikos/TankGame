@@ -17,8 +17,6 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 {
 	//We don't call super since we replace functionality
 
-	UE_LOG(LogTemp, Warning, TEXT("AI Tank has MoveVelocity: %s"),*MoveVelocity.GetSafeNormal().ToString());
-
 	FVector TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
 	FVector AIForwardIntention = MoveVelocity.GetSafeNormal();
 
