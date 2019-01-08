@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "BattleTankPlayerController.generated.h"
+class UTankAimingComponent;
 
 
 /**
@@ -15,11 +16,11 @@ class BATTLETANK_API ABattleTankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 protected:
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	class ATank* GetControlledTank() const;
-private:
-	
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+	void FoundAimingComponent(UTankAimingComponent* AimingCompRef);
+
+private:
 	UFUNCTION()
 	virtual void BeginPlay() override;
 

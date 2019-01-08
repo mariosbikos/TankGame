@@ -7,6 +7,7 @@
 #include "TankAimingComponent.generated.h"
 class UTankBarrel;
 class UTankTurret;
+class AProjectile;
 
 //Enum for Aiming state
 UENUM()
@@ -27,21 +28,44 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
-
-public:	
-	
-	//TODO: Add SetTurretReference 
-	void AimAt(FVector HitLocation, float LaunchSpeed);
-	UFUNCTION(BlueprintCallable,Category = "Setup")
-	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
+	void AimAt(FVector HitLocation);
 
 	void MoveBarrelTowards(FVector AimDirection);
 	void MoveTurretTowards(FVector AimDirection);
+	
+	UFUNCTION(BlueprintCallable,Category = "Setup")
+	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
+
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	void Fire();
 
 protected:
+	
+
+	UPROPERTY(BlueprintReadOnly, Category = "State")
+	EFiringStatus FiringState = EFiringStatus::Reloading;
+
+	//This is the standard launch speed of the tank
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float LaunchSpeed = 4000; //TODO: Find sensible default
+	
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float ReloadTimeInSeconds = 3;
+
+	double LastFireTime = 0;
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	TSubclassOf<AProjectile> ProjectileClass;
+
+private:
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
 
-	UPROPERTY(BlueprintReadOnly, Category = "State")
-	EFiringStatus FiringState = EFiringStatus::Aiming;
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+
+	virtual void BeginPlay() override;
+	bool IsBarrelMoving();
+
+	FVector AimDirection;
 };
