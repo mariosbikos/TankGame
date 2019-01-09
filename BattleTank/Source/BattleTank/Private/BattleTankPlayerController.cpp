@@ -29,7 +29,9 @@ void ABattleTankPlayerController::AimTowardsCrosshair()
 	if (!ensure(AimingComponent)) { return; }
 
 	FVector HitLocation; //OUT Parameter
-	if (GetSightRayHitLocation(HitLocation)) //is going to line-trace
+	bool bGotHitLocation = GetSightRayHitLocation(HitLocation);
+	UE_LOG(LogTemp, Warning, TEXT("bGotHitLocation: %i"), bGotHitLocation);
+	if (bGotHitLocation) //is going to line-trace
 	{
 		//Tell controlled tank to aim at this point
 		AimingComponent->AimAt(HitLocation);

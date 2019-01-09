@@ -27,7 +27,11 @@ void ABattleTankAIController::Tick(float DeltaTime)
 
 	AimingComponent->AimAt(PlayerTank->GetActorLocation());
 
-	//Fire if ready
-	AimingComponent->Fire();
+	//Fire if locked only for AI, while player can also fire when at aim state
+	if (AimingComponent->GetFiringState() == EFiringStatus::Locked)
+	{
+		AimingComponent->Fire();
+	}
+	
 
 }

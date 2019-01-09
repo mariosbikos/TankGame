@@ -18,6 +18,7 @@ void UTankTrack::BeginPlay()
 
 void UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
+	
 	DriveTrack();
 	ApplySidewaysForce();
 	CurrentThrottle = 0; //reset throttle so that if we are in the air in the next frame, no extra force will be added
