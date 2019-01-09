@@ -89,12 +89,13 @@ void UTankAimingComponent::MoveTurretTowards(FVector AimDirection)
 	FRotator AimAsRotator = AimDirection.Rotation();
 	FRotator DeltaRotator = AimAsRotator - TurretRotator;
 	//always yaw the shortest way
-	if (DeltaRotator.Yaw<180.0f && DeltaRotator.Yaw>-180.0f)
+	if (FMath::Abs(DeltaRotator.Yaw)<180.0f)
 	{
 		Turret->Rotate(DeltaRotator.Yaw); //Pitch will be clamped from (-1,1) in Elevate method.
 	}
 	else
 	{
+		//avoid going the long - way round
 		Turret->Rotate(-DeltaRotator.Yaw); //Pitch will be clamped from (-1,1) in Elevate method.
 	}
 	
