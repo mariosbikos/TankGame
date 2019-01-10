@@ -30,7 +30,7 @@ void ABattleTankPlayerController::AimTowardsCrosshair()
 
 	FVector HitLocation; //OUT Parameter
 	bool bGotHitLocation = GetSightRayHitLocation(HitLocation);
-	UE_LOG(LogTemp, Warning, TEXT("bGotHitLocation: %i"), bGotHitLocation);
+	
 	if (bGotHitLocation) //is going to line-trace
 	{
 		//Tell controlled tank to aim at this point

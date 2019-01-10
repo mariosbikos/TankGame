@@ -53,14 +53,14 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 		AimDirection = OutLaunchVelocity.GetSafeNormal(); //Get the unit direction of a vector
 		auto TankName = GetOwner()->GetName();
 		//UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s from %s with Launch Speed: %f"), *GetOwner()->GetName(), *HitLocation.ToString(), *Barrel->GetComponentLocation().ToString(), LaunchSpeed);
-		UE_LOG(LogTemp, Warning, TEXT("Tank: %s -> Aim solution found"), *GetOwner()->GetName());
+		//UE_LOG(LogTemp, Warning, TEXT("Tank: %s -> Aim solution found"), *GetOwner()->GetName());
 		//Move the barrel
 		MoveBarrelTowards(AimDirection); 
 		MoveTurretTowards(AimDirection);
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Tank: %s -> No Aim Solve Found"),*GetOwner()->GetName());
+		//UE_LOG(LogTemp, Warning, TEXT("Tank: %s -> No Aim Solve Found"),*GetOwner()->GetName());
 	}
 }
 
@@ -129,7 +129,7 @@ EFiringStatus UTankAimingComponent::GetFiringState() const
 	return FiringState;
 }
 
-int UTankAimingComponent::GetRoundsLeft() const
+int32 UTankAimingComponent::GetRoundsLeft() const
 {
 	return RoundsLeft;
 }

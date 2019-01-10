@@ -5,6 +5,7 @@
 UTankTrack::UTankTrack()
 {
 	PrimaryComponentTick.bCanEverTick = false;
+
 }
 
 
