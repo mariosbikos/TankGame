@@ -44,4 +44,7 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	float LineTraceRange = 10000000;
+
+	UFUNCTION()
+	void OnPossessedTankDeath();
 };

@@ -21,4 +21,10 @@ private:
 	//How close the AI tank can get to the player
 	UPROPERTY(EditAnywhere,Category = "Movement")
 	float AcceptanceRadius = 8000;
+
+	//called when pawn is possessed by AI Controller
+	virtual void SetPawn(APawn* InPawn) override;
+
+	UFUNCTION()
+	void OnPossessedTankDeath();
 };

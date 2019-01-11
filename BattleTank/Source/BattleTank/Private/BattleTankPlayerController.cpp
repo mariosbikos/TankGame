@@ -89,3 +89,8 @@ bool ABattleTankPlayerController::GetLookVectorHitLocation(FVector LookDirection
 	OutLookVectorHitLocation = FVector(0);
 	return false;
 }
+
+void ABattleTankPlayerController::OnPossessedTankDeath()
+{
+	StartSpectatingOnly();
+}
