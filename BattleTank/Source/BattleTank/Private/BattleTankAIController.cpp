@@ -19,7 +19,7 @@ void ABattleTankAIController::Tick(float DeltaTime)
 	auto PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
 	auto ControlledTank = GetPawn();
 	
-	if (!ensure(PlayerTank) || !ensure(ControlledTank)){return;}
+	if (!(PlayerTank) || !(ControlledTank)){return;}
 	
 	//Move towards player
 	MoveToActor(PlayerTank, AcceptanceRadius);
@@ -44,10 +44,13 @@ void ABattleTankAIController::SetPawn(APawn* InPawn)
 	if (InPawn)
 	{
 		ATank* PossessedTank = Cast<ATank>(InPawn);
-		if (!ensure(PossessedTank)) { return; }
+		if (PossessedTank)
+		{ 
+			//subscribe local method to tank's death event
+			PossessedTank->OnDeath.AddUniqueDynamic(this, &ABattleTankAIController::OnPossessedTankDeath);
+		}
 		
-		//subscribe local method to tank's death event
-		PossessedTank->OnDeath.AddUniqueDynamic(this, &ABattleTankAIController::OnPossessedTankDeath);
+		
 	}
 }
 

@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankTrack.h"
+#include "SprungWheel.h"
 
 UTankTrack::UTankTrack()
 {
@@ -8,36 +9,30 @@ UTankTrack::UTankTrack()
 
 }
 
-
-void UTankTrack::BeginPlay()
-{
-	Super::BeginPlay();
-	OnComponentHit.AddDynamic(this, &UTankTrack::OnHit);
-
-	
-}
-
-void UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+TArray<ASprungWheel*> UTankTrack::GetWheels() const
 {
 	
-	DriveTrack();
-	ApplySidewaysForce();
-	CurrentThrottle = 0; //reset throttle so that if we are in the air in the next frame, no extra force will be added
+	GetChildrenComponents(false)
 }
 
 void UTankTrack::SetThrottle(float Throttle)
 {
-	CurrentThrottle = FMath::Clamp<float>(CurrentThrottle + Throttle,-1,1);
+	float CurrentThrottle = FMath::Clamp<float>(CurrentThrottle + Throttle,-1,1);
+	DriveTrack(CurrentThrottle);
 }
 
-void UTankTrack::DriveTrack()
+void UTankTrack::DriveTrack(float CurrentThrottle)
 {
 	//TODO: Clamp actual throttle value to disable player from over-drive
-	FVector ForceApplied = GetForwardVector()*CurrentThrottle*TrackMaxDrivingForce;
-	FVector ForceLocation = GetComponentLocation(); //the position on which we apply the force
+	float ForceApplied = CurrentThrottle*TrackMaxDrivingForce;
 
-	auto TankRoot = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
-	TankRoot->AddForceAtLocation(ForceApplied, ForceLocation);
+	TArray<ASprungWheel*> Wheels = GetWheels();
+	float ForcePerWheel = ForceApplied / Wheels.Num();
+	for (ASprungWheel* Wheel : Wheels)
+	{
+		Wheel->AddDrivingForce(ForcePerWheel);
+	}
+
 }
 
 void UTankTrack::ApplySidewaysForce()

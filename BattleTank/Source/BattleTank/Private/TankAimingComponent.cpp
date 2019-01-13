@@ -66,13 +66,13 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 
 
 
-void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
+void UTankAimingComponent::MoveBarrelTowards(FVector InAimDirection)
 {
 
 	if (!Barrel) { return; }
 	//Work out difference between current barrel rotation and aim direction
 	FRotator BarrelRotator = Barrel->GetForwardVector().Rotation();
-	FRotator AimAsRotator = AimDirection.Rotation();
+	FRotator AimAsRotator = InAimDirection.Rotation();
 	FRotator DeltaRotator = AimAsRotator - BarrelRotator;
 
 	Barrel->Elevate(DeltaRotator.Pitch); //Pitch will be clamped from (-1,1) in Elevate method. 
@@ -80,13 +80,13 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	
 }
 
-void UTankAimingComponent::MoveTurretTowards(FVector AimDirection)
+void UTankAimingComponent::MoveTurretTowards(FVector InAimDirection)
 {
 
 	if (!Turret) { return; }
 	//Work out difference between current turret rotation and aim direction
 	FRotator TurretRotator = Turret->GetForwardVector().Rotation();
-	FRotator AimAsRotator = AimDirection.Rotation();
+	FRotator AimAsRotator = InAimDirection.Rotation();
 	FRotator DeltaRotator = AimAsRotator - TurretRotator;
 	//always yaw the shortest way
 	if (FMath::Abs(DeltaRotator.Yaw)<180.0f)

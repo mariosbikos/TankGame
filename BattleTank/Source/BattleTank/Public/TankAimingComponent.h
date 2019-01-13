@@ -31,8 +31,8 @@ public:
 
 	void AimAt(FVector HitLocation);
 
-	void MoveBarrelTowards(FVector AimDirection);
-	void MoveTurretTowards(FVector AimDirection);
+	void MoveBarrelTowards(FVector InAimDirection);
+	void MoveTurretTowards(FVector InAimDirection);
 	
 	UFUNCTION(BlueprintCallable,Category = "Setup")
 	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
