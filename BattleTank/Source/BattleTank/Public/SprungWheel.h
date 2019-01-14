@@ -39,4 +39,10 @@ private:
 	class UPhysicsConstraintComponent* AxleWheelConstraint = nullptr;
 
 	void SetupConstraints();
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit );
+
+	void ApplyForce();
+
+	float TotalForceMagnitudeThisFrame = 0;
 };
